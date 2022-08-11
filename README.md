@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+An application in which you can ask your questions and get instant rewards for the solutions you provide
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
