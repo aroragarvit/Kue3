@@ -24,7 +24,7 @@ contract Kue {
         string answer;
     }
     uint256 answerCount = 0;
-    mapping (uint =>Answer[]) answers;  // mapping answers to question id
+    mapping (uint =>uint[]) answers;  // mapping answers to question id
     mapping(uint=>Answer) answer;     // access answer using answer id
     
     function createQuestion(string memory question ) external payable{
@@ -39,11 +39,13 @@ contract Kue {
 }
 
 function answerQuestion (uint idQuestion, string memory answer ) external {  // id is the id of the question
+    require(questions[idQuestion].isPaid == false);
+    require(msg.sender!=questions[idQuestion].questionAuthor );
     Answer memory answerStruct;
     answerStruct.autor = msg.sender;
     answerStruct.answer = answer;
     answerStruct.id = answerCount++;
-    answers[idQuestion].push(answerStruct); 
+    answers[idQuestion].push(answerStruct.id); 
 }
 
 // require that owner of the question can only approve the payement 
@@ -62,6 +64,19 @@ function answerQuestion (uint idQuestion, string memory answer ) external {  // 
         questions[_idQuestion].poolMoney += msg.value;
     }
 
-    
+    function getQuestionById(uint _idQuestion) public view returns (string memory){
+        return questions[_idQuestion].question;
+    }
+
+    function getQuestionsByOwner(address _owner) public view returns (uint[] memory ){
+        return questionOwner[_owner];
+    }
+
+    function getAnswersByQuestion(uint _idQuestion) public view returns (uint[] memory){
+        return answers[_idQuestion];
+    }
+    function getAnswerById(uint _idAnswer) public view returns (string memory){
+        return answer[_idAnswer].answer;
+    }
 
 }
