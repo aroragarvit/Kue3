@@ -35,4 +35,11 @@ contract Kue {
         questionOwner[msg.sender].push(questionStruct.id);
 }
 
+function answerQuestion (uint idQuestion, string memory answer ) external {  // id is the id of the question
+    Answer memory answerStruct;
+    answerStruct.autor = msg.sender;
+    answerStruct.answer = answer;
+    answerStruct.id = answerCount++;
+    answers[idQuestion].push(answerStruct); 
+}
 }
