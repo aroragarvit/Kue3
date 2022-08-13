@@ -9,6 +9,8 @@ contract Kue {
         string question;
         uint256 poolMoney;
         address questionAuthor;
+        bool isPaid;
+        uint numberOfContribution;
         }
 
     uint256 questionCount = 0;
@@ -30,6 +32,7 @@ contract Kue {
         questionStruct.id = questionCount++;
         questionStruct.question = question;
         questionStruct.questionAuthor = msg.sender;
+        questionStruct.isPaid = false;
         questionStruct.poolMoney = msg.value;
         questions[questionStruct.id] = questionStruct;
         questionOwner[msg.sender].push(questionStruct.id);
@@ -46,10 +49,19 @@ function answerQuestion (uint idQuestion, string memory answer ) external {  // 
 // require that owner of the question can only approve the payement 
     function approvePayment(uint _idQuestion, uint _answerId) external payable{  
         require(msg.sender == questions[_idQuestion].questionAuthor); // require that the sender is the owner of the question
-    
+        questions[_idQuestion].isPaid = true;
         uint value = questions[_idQuestion].poolMoney;
         address answerAuthor = answer[_answerId].autor;
         payable(answerAuthor).transfer(value);
          }
+
+    function contributeToPool(uint _idQuestion) external payable{
+        require( msg.sender != questions[_idQuestion].questionAuthor); // require that the sender is not the owner of the question
+        require(questions[_idQuestion].isPaid == false); // require that the question is not paid
+        questions[_idQuestion].numberOfContribution++;
+        questions[_idQuestion].poolMoney += msg.value;
+    }
+
+    
 
 }
