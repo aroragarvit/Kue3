@@ -25,4 +25,14 @@ contract Kue {
     mapping (uint =>Answer[]) answers;  // mapping answers to question id
     mapping(uint=>Answer) answer;     // access answer using answer id
     
+    function createQuestion(string memory question ) external payable{
+        Question memory questionStruct ;
+        questionStruct.id = questionCount++;
+        questionStruct.question = question;
+        questionStruct.questionAuthor = msg.sender;
+        questionStruct.poolMoney = msg.value;
+        questions[questionStruct.id] = questionStruct;
+        questionOwner[msg.sender].push(questionStruct.id);
+}
+
 }
