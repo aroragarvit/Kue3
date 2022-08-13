@@ -1,6 +1,7 @@
 import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
 import { useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -23,8 +24,9 @@ export const Navbar = () => {
             icon={colorMode === "dark" ? <MoonIcon /> : <SunIcon />}
             onClick={toggleColorMode}
             rounded="full"
-            marginRight={2}
+            marginRight={4}
           />
+          <ConnectButton />
         </Flex>
       </Flex>
     </Box>
