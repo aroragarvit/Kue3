@@ -42,4 +42,14 @@ function answerQuestion (uint idQuestion, string memory answer ) external {  // 
     answerStruct.id = answerCount++;
     answers[idQuestion].push(answerStruct); 
 }
+
+// require that owner of the question can only approve the payement 
+    function approvePayment(uint _idQuestion, uint _answerId) external payable{  
+        require(msg.sender == questions[_idQuestion].questionAuthor); // require that the sender is the owner of the question
+    
+        uint value = questions[_idQuestion].poolMoney;
+        address answerAuthor = answer[_answerId].autor;
+        payable(answerAuthor).transfer(value);
+         }
+
 }
