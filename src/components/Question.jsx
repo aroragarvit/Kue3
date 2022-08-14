@@ -20,9 +20,8 @@ export const Question = () => {
         I came across this term recently and I want to know what it means. Can
         you please explain about it in details? Thanks
       </Text>
-      <Button type="solid" colorScheme="blue" marginTop={4} size="sm">
-        {" "}
-        Answer{" "}
+      <Button type="solid" colorScheme="blue" marginTop={8} size="sm">
+        Answer
       </Button>
     </Box>
   );
