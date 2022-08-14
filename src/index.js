@@ -7,7 +7,9 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import App from "./App";
+import AddQuestion from "./components/addQuestion";
 import Sidebar from "./layouts/Sidebar";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const { chains, provider } = configureChains(
   [chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum],
@@ -31,11 +33,17 @@ root.render(
     <ChakraProvider>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
-          <Navbar />
-          <Flex flexDirection={"row-reverse"}>
-            <Sidebar />
-            <App />
-          </Flex>
+          <BrowserRouter>
+            <Navbar />
+            <Flex flexDirection={"row-reverse"}>
+              <Sidebar />
+
+              <Routes>
+                <Route path="/addquestion" element={<AddQuestion />} />
+                <Route path="/" element={<App />} />
+              </Routes>
+            </Flex>
+          </BrowserRouter>
         </RainbowKitProvider>
       </WagmiConfig>
     </ChakraProvider>
