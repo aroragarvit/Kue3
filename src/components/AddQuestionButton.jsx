@@ -1,6 +1,8 @@
 //Button to Add a Question
 import { Button, useToast } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
+import { ethers } from "ethers";
+import { useState, useEffect } from "react";
 import {
   useWaitForTransaction,
   useContractWrite,
