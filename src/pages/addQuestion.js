@@ -55,7 +55,7 @@ export default function AddQuestion() {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <AddQuestionButton />
+        <AddQuestionButton value={value} question={question} />
       </Box>
     </Flex>
   );
