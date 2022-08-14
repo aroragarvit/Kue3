@@ -7,7 +7,7 @@ import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import App from "./App";
-import AddQuestion from "./components/addQuestion";
+import AddQuestion from "./pages/addQuestion";
 import Sidebar from "./layouts/Sidebar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -37,7 +37,6 @@ root.render(
             <Navbar />
             <Flex flexDirection={"row-reverse"}>
               <Sidebar />
-
               <Routes>
                 <Route path="/addquestion" element={<AddQuestion />} />
                 <Route path="/" element={<App />} />
