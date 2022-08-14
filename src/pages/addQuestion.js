@@ -11,6 +11,7 @@ import { AddQuestionButton } from "../components/AddQuestionButton";
 
 export default function AddQuestion() {
   const [question, setQuestion] = React.useState("");
+  const [title, setTitle] = React.useState("");
   const [value, setValue] = React.useState("");
   const handleChange = (event) => setQuestion(event.target.value);
   return (
@@ -25,6 +26,14 @@ export default function AddQuestion() {
         <Text mb={6} textTransform="uppercase" fontSize="lg" fontWeight="bold">
           Ask a question
         </Text>
+        <Input
+          bgColor={useColorModeValue("gray.100", "gray.700")}
+          borderColor={useColorModeValue("gray.300", "gray.700")}
+          mb={6}
+          placeholder="Give your question a title"
+          value={value}
+          onChange={(e) => setTitle(e.target.value)}
+        />
         <Textarea
           bgColor={useColorModeValue("gray.100", "gray.700")}
           borderColor={useColorModeValue("gray.300", "gray.700")}
