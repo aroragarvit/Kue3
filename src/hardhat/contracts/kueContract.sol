@@ -38,25 +38,27 @@ contract Kue {
         questionOwner[msg.sender].push(questionStruct.id);
 }
 
-function answerQuestion (uint idQuestion, string memory answer ) external {  // id is the id of the question
+function answerQuestion (uint idQuestion, string memory _answer ) external {  // id is the id of the question
     require(questions[idQuestion].isPaid == false);
     require(msg.sender!=questions[idQuestion].questionAuthor );
     Answer memory answerStruct;
     answerStruct.autor = msg.sender;
-    answerStruct.answer = answer;
+    answerStruct.answer = _answer;
     answerStruct.id = ++answerCount;
+    answer[answerStruct.id] = answerStruct;
     answers[idQuestion].push(answerStruct.id); 
 }
 
 // require that owner of the question can only approve the payement 
-    function approvePayment(uint _idQuestion, uint _answerId) external payable{  
+    function approvePayment(uint _idQuestion, uint _answerId) external {  
         require(msg.sender == questions[_idQuestion].questionAuthor); // require that the sender is the owner of the question
-        
+        require(msg.sender != answer[ _answerId].autor); // require that the sender is not the owner of the answer
         require(questions[_idQuestion].isPaid == false);
         
         uint value = questions[_idQuestion].poolMoney;
         address answerAuthor = answer[_answerId].autor;
         payable(answerAuthor).transfer(value);
+        questions[_idQuestion].poolMoney =  questions[_idQuestion].poolMoney-value;
         questions[_idQuestion].isPaid = true;
          }
 
@@ -67,8 +69,8 @@ function answerQuestion (uint idQuestion, string memory answer ) external {  // 
         questions[_idQuestion].poolMoney += msg.value;
     }
 
-    function getQuestionById(uint _idQuestion) external view returns (string memory){
-        return questions[_idQuestion].question;
+    function getQuestionById(uint _idQuestion) external view returns (Question memory){
+        return questions[_idQuestion];
     }
 
     function getQuestionsByOwner(address _owner) external view returns (uint[] memory ){
@@ -78,8 +80,8 @@ function answerQuestion (uint idQuestion, string memory answer ) external {  // 
     function getAnswersByQuestion(uint _idQuestion) external view returns (uint[] memory){
         return answers[_idQuestion];
     }
-    function getAnswerById(uint _idAnswer) external view returns (string memory){
-        return answer[_idAnswer].answer;
+    function getAnswerById(uint _idAnswer) external view returns (Answer memory){
+        return answer[_idAnswer];
     }
 
     function getLatestQuestion(uint256 _page ) external view returns (Question[] memory){ // page 0,1,2 etc like this 
