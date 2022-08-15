@@ -29,7 +29,7 @@ contract Kue {
     
     function createQuestion(string memory question ) external payable{
         Question memory questionStruct ;
-        questionStruct.id = questionCount++;
+        questionStruct.id = ++questionCount;
         questionStruct.question = question;
         questionStruct.questionAuthor = msg.sender;
         questionStruct.isPaid = false;
@@ -44,17 +44,20 @@ function answerQuestion (uint idQuestion, string memory answer ) external {  // 
     Answer memory answerStruct;
     answerStruct.autor = msg.sender;
     answerStruct.answer = answer;
-    answerStruct.id = answerCount++;
+    answerStruct.id = ++answerCount;
     answers[idQuestion].push(answerStruct.id); 
 }
 
 // require that owner of the question can only approve the payement 
     function approvePayment(uint _idQuestion, uint _answerId) external payable{  
         require(msg.sender == questions[_idQuestion].questionAuthor); // require that the sender is the owner of the question
-        questions[_idQuestion].isPaid = true;
+        
+        require(questions[_idQuestion].isPaid == false);
+        
         uint value = questions[_idQuestion].poolMoney;
         address answerAuthor = answer[_answerId].autor;
         payable(answerAuthor).transfer(value);
+        questions[_idQuestion].isPaid = true;
          }
 
     function contributeToPool(uint _idQuestion) external payable{
@@ -64,19 +67,44 @@ function answerQuestion (uint idQuestion, string memory answer ) external {  // 
         questions[_idQuestion].poolMoney += msg.value;
     }
 
-    function getQuestionById(uint _idQuestion) public view returns (string memory){
+    function getQuestionById(uint _idQuestion) external view returns (string memory){
         return questions[_idQuestion].question;
     }
 
-    function getQuestionsByOwner(address _owner) public view returns (uint[] memory ){
+    function getQuestionsByOwner(address _owner) external view returns (uint[] memory ){
         return questionOwner[_owner];
     }
 
-    function getAnswersByQuestion(uint _idQuestion) public view returns (uint[] memory){
+    function getAnswersByQuestion(uint _idQuestion) external view returns (uint[] memory){
         return answers[_idQuestion];
     }
-    function getAnswerById(uint _idAnswer) public view returns (string memory){
+    function getAnswerById(uint _idAnswer) external view returns (string memory){
         return answer[_idAnswer].answer;
     }
 
+    function getLatestQuestion(uint256 _page ) external view returns (Question[] memory){ // page 0,1,2 etc like this 
+       
+        
+        uint256 _localLatest = (_page - 1) * 10;
+        require(questionCount > _localLatest);
+        _localLatest = questionCount - _localLatest;
+        uint256 _counter = 0;
+        if (_localLatest > 10) {
+            Question[] memory _latestposts = new Question[](10);
+            for (uint256 i = _localLatest; i > (_localLatest - 10); i--) {
+                _latestposts[_counter] = questions[i];
+                _counter++;
+            }
+            return _latestposts;
+        } else {
+            Question[] memory _latestposts = new Question[](_localLatest);
+            for (uint256 i = _localLatest; i > 0; i--) {
+                _latestposts[_counter] = questions[i];
+                _counter++;
+            }
+            return _latestposts;
+        
+    }
+        
+    }
 }
