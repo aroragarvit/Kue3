@@ -12,7 +12,7 @@ import { AddQuestionButton } from "../components/AddQuestionButton";
 export default function AddQuestion() {
   const [question, setQuestion] = React.useState("");
   const [title, setTitle] = React.useState("");
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = React.useState("0");
   const handleChange = (event) => setQuestion(event.target.value);
   return (
     <Flex
@@ -31,7 +31,7 @@ export default function AddQuestion() {
           borderColor={useColorModeValue("gray.300", "gray.700")}
           mb={6}
           placeholder="Give your question a title"
-          value={value}
+          value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <Textarea

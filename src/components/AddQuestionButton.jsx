@@ -8,15 +8,18 @@ import {
   useContractWrite,
   usePrepareContractWrite,
 } from "wagmi";
-const kueContract =
-  "../hardhat/artifactssrc/hardhat/contracts/kueContract.sol/Kue.json";
+import kueContract from "../hardhat/artifacts/src/hardhat/contracts/kueContract.sol/Kue.json";
+
 const abi = kueContract.abi;
+console.log(abi);
 
 export const AddQuestionButton = ({ value, question }) => {
   const toast = useToast();
+
   const { config } = usePrepareContractWrite({
     //  making config in curly because its a js object
-    addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
+    //process.env.REACT_APP_CONTRACT_ADDRESS,
+    addressOrName: "0x1b1b016f6d2b11d729e4f55d8170cfffc3af1889",
     contractInterface: abi,
     functionName: "createQuestion",
     args: [question],
@@ -36,7 +39,7 @@ export const AddQuestionButton = ({ value, question }) => {
 
         isClosable: true,
       });
-      window.location.href("/");
+      window.location.href = "/";
     }
   }, [isSuccess]);
   return (
