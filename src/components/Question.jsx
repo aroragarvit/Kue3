@@ -1,6 +1,8 @@
 import { Box, Button, Text, Flex, useColorModeValue } from "@chakra-ui/react";
+import { ethers } from "ethers";
 
-export const Question = () => {
+export const Question = ({ question }) => {
+  console.log(question);
   return (
     <Box
       border={"1px solid"}
@@ -10,16 +12,15 @@ export const Question = () => {
     >
       <Flex justifyContent={"space-between"} alignContent="center">
         <Text fontSize={"xl"} as="strong" lineHeight={2}>
-          What are zero knowlege proofs?
+          Blockchain
         </Text>
         <Button isDisabled colorScheme="blue" borderRadius={999} h={6}>
-          <Text fontSize={"xs"}>0.123 MATIC</Text>
+          <Text fontSize={"xs"}>
+            {ethers.BigNumber.from(question.poolMoney).toString()} pol
+          </Text>
         </Button>
       </Flex>
-      <Text>
-        I came across this term recently and I want to know what it means. Can
-        you please explain about it in details? Thanks
-      </Text>
+      <Text>{question.question}</Text>
       <Button type="solid" colorScheme="blue" marginTop={8} size="sm">
         Answer
       </Button>
