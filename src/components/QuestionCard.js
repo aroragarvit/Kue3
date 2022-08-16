@@ -22,7 +22,9 @@ export const QuestionCard = ({ question }) => {
       <Text>{question.question}</Text>
 
       <Button
-        onClick={() => (window.location.href = "./answer")}
+        onClick={() => {
+          window.location.href = "./answer";
+        }}
         type="solid"
         colorScheme="blue"
         marginTop={8}

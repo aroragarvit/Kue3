@@ -1,6 +1,6 @@
 import "@rainbow-me/rainbowkit/styles.css";
 import AddQuestion from "./pages/addQuestion";
-import Answer from "./pages/answer";
+import questionDesc from "./pages/questionDesc";
 import Home from "./pages/home";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ChakraProvider, Flex } from "@chakra-ui/react";
 import { Navbar } from "./layouts/Navbar";
 import { Sidebar } from "./layouts/Sidebar";
+
 import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { publicProvider } from "wagmi/providers/public";
@@ -41,7 +42,7 @@ root.render(
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/addquestion" element={<AddQuestion />} />
-                <Route path="/answer" element={<Answer />} />
+                <Route path="/questiondesc/:id" element={<questionDesc />} />
               </Routes>
             </Flex>
           </BrowserRouter>

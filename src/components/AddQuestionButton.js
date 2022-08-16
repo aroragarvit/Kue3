@@ -33,7 +33,9 @@ export const AddQuestionButton = ({ value, question }) => {
 
         isClosable: true,
       });
-      window.location.href = "/";
+      setTimeout(function () {
+        window.location.href = "/";
+      }, 1000);
     }
   }, [isSuccess]);
   return (
