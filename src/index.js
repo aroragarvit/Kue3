@@ -8,6 +8,7 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import App from "./App";
 import AddQuestion from "./pages/addQuestion";
+import Answer from "./pages/answer";
 import Sidebar from "./layouts/Sidebar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -40,6 +41,7 @@ root.render(
               <Routes>
                 <Route path="/addquestion" element={<AddQuestion />} />
                 <Route path="/" element={<App />} />
+                <Route path="/answer" element={<Answer />} />
               </Routes>
             </Flex>
           </BrowserRouter>

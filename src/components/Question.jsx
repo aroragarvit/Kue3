@@ -1,5 +1,7 @@
 import { Box, Button, Text, Flex, useColorModeValue } from "@chakra-ui/react";
 import { ethers } from "ethers";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export const Question = ({ question }) => {
   console.log(question);
@@ -21,7 +23,14 @@ export const Question = ({ question }) => {
         </Button>
       </Flex>
       <Text>{question.question}</Text>
-      <Button type="solid" colorScheme="blue" marginTop={8} size="sm">
+
+      <Button
+        onClick={(window.location.href = "./answer")}
+        type="solid"
+        colorScheme="blue"
+        marginTop={8}
+        size="sm"
+      >
         Answer
       </Button>
     </Box>

@@ -20,9 +20,13 @@ export default function Sidebar() {
           </Button>
         )}
         {href.pathname === "/addquestion" && (
-          <Button colorScheme="blue" onClick={() => {
-            window.location.href = "/";
-          }} w={"12rem"}>
+          <Button
+            colorScheme="blue"
+            onClick={() => {
+              window.location.href = "/";
+            }}
+            w={"12rem"}
+          >
             Home
           </Button>
         )}
