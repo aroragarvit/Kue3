@@ -1,5 +1,6 @@
 import { Box, Button, Text, Flex, useColorModeValue } from "@chakra-ui/react";
 import { ethers } from "ethers";
+import { Link } from "react-router-dom";
 
 export const QuestionCard = ({ question }) => {
   return (
@@ -10,9 +11,11 @@ export const QuestionCard = ({ question }) => {
       borderColor={useColorModeValue("gray.300", "gray.600")}
     >
       <Flex justifyContent={"space-between"} alignContent="center">
-        <Text fontSize={"xl"} as="strong" lineHeight={2}>
-          Blockchain
-        </Text>
+        <Link to={`/questionDesc/${question.id.toString()}`}>
+          <Text fontSize={"xl"} as="strong" lineHeight={2}>
+            Blockchain
+          </Text>
+        </Link>
         <Button isDisabled colorScheme="blue" borderRadius={999} h={6}>
           <Text fontSize={"xs"}>
             {ethers.BigNumber.from(question.poolMoney).toString()} pol
@@ -22,9 +25,7 @@ export const QuestionCard = ({ question }) => {
       <Text>{question.question}</Text>
 
       <Button
-        onClick={() => {
-          window.location.href = "./answer";
-        }}
+        onClick={() => {}}
         type="solid"
         colorScheme="blue"
         marginTop={8}

@@ -1,6 +1,6 @@
 import "@rainbow-me/rainbowkit/styles.css";
 import AddQuestion from "./pages/addQuestion";
-import questionDesc from "./pages/questionDesc";
+import QuestionDesc from "./pages/questionDesc";
 import Home from "./pages/home";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -42,7 +42,7 @@ root.render(
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/addquestion" element={<AddQuestion />} />
-                <Route path="/questiondesc/:id" element={<questionDesc />} />
+                <Route path="/questionDesc/:id" element={<QuestionDesc />} />
               </Routes>
             </Flex>
           </BrowserRouter>
