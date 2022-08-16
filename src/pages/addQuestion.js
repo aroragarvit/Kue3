@@ -13,6 +13,7 @@ export default function AddQuestion() {
   const [question, setQuestion] = React.useState("");
   const [title, setTitle] = React.useState("");
   const [value, setValue] = React.useState("0");
+  const handleChange = (event) => setQuestion(event.target.value);
   return (
     <Flex
       grow={1}
