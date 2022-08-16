@@ -2,6 +2,7 @@ import { Box, Button, Text, Flex, useColorModeValue } from "@chakra-ui/react";
 import { ethers } from "ethers";
 
 export const QuestionCard = ({ question }) => {
+  console.log(question)
   return (
     <Box
       border={"1px solid"}
@@ -15,7 +16,7 @@ export const QuestionCard = ({ question }) => {
         </Text>
         <Button isDisabled colorScheme="blue" borderRadius={999} h={6}>
           <Text fontSize={"xs"}>
-            {ethers.BigNumber.from(question.poolMoney).toString()} pol
+            {(parseInt(question.poolMoney)/10e18).toString()} MATIC
           </Text>
         </Button>
       </Flex>
