@@ -13,7 +13,7 @@ import Sidebar from "./layouts/Sidebar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const { chains, provider } = configureChains(
-  [chain.polygonMumbai],
+  [chain.hardhat, chain.polygonMumbai],
   [publicProvider()]
 );
 
