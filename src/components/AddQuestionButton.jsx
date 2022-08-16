@@ -18,7 +18,7 @@ export const AddQuestionButton = ({ value, question }) => {
   const { config } = usePrepareContractWrite({
     //  making config in curly because its a js object
     //process.env.REACT_APP_CONTRACT_ADDRESS,
-    addressOrName: "0x1b1b016f6d2b11d729e4f55d8170cfffc3af1889",
+    addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "createQuestion",
     args: [question],

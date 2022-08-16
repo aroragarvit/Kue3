@@ -4,8 +4,8 @@ import { useContractRead } from "wagmi";
 import kueContract from "./hardhat/artifacts/src/hardhat/contracts/kueContract.sol/Kue.json";
 const abi = kueContract.abi;
 const App = () => {
-  const { data, isError, isLoading } = useContractRead({
-    addressOrName: "0x1b1b016f6d2b11d729e4f55d8170cfffc3af1889",
+  const { data, isLoading } = useContractRead({
+    addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "getLatestQuestion",
     args: [1],
