@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { Flex, useColorModeValue, Button } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
-export default function Sidebar() {
+export const Sidebar = () => {
   const href = useLocation();
   return (
     <Flex
