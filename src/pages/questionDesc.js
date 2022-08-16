@@ -2,7 +2,9 @@ import { useContractRead } from "wagmi";
 import { useAbi } from "../hooks/useAbi";
 import { Box } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-export default function QuestionCard() {
+import { QuestionCard } from "../components/QuestionCard";
+import Answers from "../components/Answers";
+export default function QuestionDesc() {
   const { id } = useParams();
   const abi = useAbi();
   const { data, isLoading } = useContractRead({
@@ -11,5 +13,12 @@ export default function QuestionCard() {
     functionName: "getQuestionById",
     args: [id],
   });
+
   console.log(data);
+  return (
+    <Box mb={8} py={32} width={"50%"} marginX={"auto"}>
+      <QuestionCard question={data} />
+      <Answers id={id} />
+    </Box>
+  );
 }
