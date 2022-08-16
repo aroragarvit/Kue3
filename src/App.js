@@ -5,7 +5,7 @@ import { useState } from "react";
 import kueContract from "./hardhat/artifacts/src/hardhat/contracts/kueContract.sol/Kue.json";
 const abi = kueContract.abi;
 const App = () => {
-  const { data, isError, isLoading, isFetched } = useContractRead({
+  const { data, isError, isLoading } = useContractRead({
     addressOrName: "0x1b1b016f6d2b11d729e4f55d8170cfffc3af1889",
     contractInterface: abi,
     functionName: "getLatestQuestion",
@@ -16,12 +16,11 @@ const App = () => {
     <Box py={32} w={"full"} px={16}>
       {isLoading ? (
         <Box>Loading...</Box>
-      ) : isFetched ? (
-        <Box> loaded </Box>
+      ) : data ? (
+        data.map((eachQue) => {
+          return <Question key={eachQue.id} question={eachQue} />;
+        })
       ) : null}
-      {data.map((eachQue) => {
-        return <Question key={eachQue.id} question={eachQue} />;
-      })}
     </Box>
   );
 };
