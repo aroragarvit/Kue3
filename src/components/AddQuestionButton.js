@@ -11,7 +11,6 @@ import {
 import kueContract from "../hardhat/artifacts/src/hardhat/contracts/kueContract.sol/Kue.json";
 
 const abi = kueContract.abi;
-console.log(abi);
 
 export const AddQuestionButton = ({ value, question }) => {
   const toast = useToast();
@@ -19,7 +18,7 @@ export const AddQuestionButton = ({ value, question }) => {
   const { config } = usePrepareContractWrite({
     //  making config in curly because its a js object
     //process.env.REACT_APP_CONTRACT_ADDRESS,
-    addressOrName: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "createQuestion",
     args: [question],
