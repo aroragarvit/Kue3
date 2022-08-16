@@ -1,16 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { ChakraProvider, Flex } from "@chakra-ui/react";
-import { Navbar } from "./layouts/Navbar";
 import "@rainbow-me/rainbowkit/styles.css";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
-import { publicProvider } from "wagmi/providers/public";
-import App from "./App";
 import AddQuestion from "./pages/addQuestion";
 import Answer from "./pages/answer";
-import Sidebar from "./layouts/Sidebar";
+import Home from "./pages/home";
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ChakraProvider, Flex } from "@chakra-ui/react";
+import { Navbar } from "./layouts/Navbar";
+import { Sidebar } from "./layouts/Sidebar";
+import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { publicProvider } from "wagmi/providers/public";
 
 const { chains, provider } = configureChains(
   [chain.hardhat, chain.polygonMumbai],
@@ -39,8 +39,8 @@ root.render(
             <Flex flexDirection={"row-reverse"}>
               <Sidebar />
               <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="/addquestion" element={<AddQuestion />} />
-                <Route path="/" element={<App />} />
                 <Route path="/answer" element={<Answer />} />
               </Routes>
             </Flex>

@@ -1,23 +1,18 @@
-//Button to Add a Question
-import { Button, useToast } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
+import { Button, useToast } from "@chakra-ui/react";
 import { ethers } from "ethers";
-import { useState, useEffect } from "react";
+import { useAbi } from "../hooks/useAbi";
+import { useEffect } from "react";
 import {
-  useWaitForTransaction,
   useContractWrite,
   usePrepareContractWrite,
+  useWaitForTransaction,
 } from "wagmi";
-import kueContract from "../hardhat/artifacts/src/hardhat/contracts/kueContract.sol/Kue.json";
-
-const abi = kueContract.abi;
 
 export const AddQuestionButton = ({ value, question }) => {
   const toast = useToast();
-
+  const abi = useAbi();
   const { config } = usePrepareContractWrite({
-    //  making config in curly because its a js object
-    //process.env.REACT_APP_CONTRACT_ADDRESS,
     addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "createQuestion",
