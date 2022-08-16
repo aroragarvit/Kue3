@@ -1,8 +1,15 @@
-import { Box, Button, Text, Flex, useColorModeValue } from "@chakra-ui/react";
-import { ethers } from "ethers";
+import {
+  Box,
+  Button,
+  Text,
+  Flex,
+  useColorModeValue,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { AnswerModal } from "./AnswerModal";
 
 export const QuestionCard = ({ question }) => {
-  console.log(question)
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box
       border={"1px solid"}
@@ -16,14 +23,14 @@ export const QuestionCard = ({ question }) => {
         </Text>
         <Button isDisabled colorScheme="blue" borderRadius={999} h={6}>
           <Text fontSize={"xs"}>
-            {(parseInt(question.poolMoney)/10e18).toString()} MATIC
+            {(parseInt(question.poolMoney) / 10e18).toString()} MATIC
           </Text>
         </Button>
       </Flex>
       <Text>{question.question}</Text>
 
       <Button
-        onClick={() => (window.location.href = "./answer")}
+        onClick={onOpen}
         type="solid"
         colorScheme="blue"
         marginTop={8}
@@ -31,6 +38,7 @@ export const QuestionCard = ({ question }) => {
       >
         Answer
       </Button>
+      <AnswerModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
     </Box>
   );
 };
