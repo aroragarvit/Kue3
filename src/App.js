@@ -1,7 +1,6 @@
 import { Question } from "./components/Question";
 import { Box } from "@chakra-ui/react";
 import { useContractRead } from "wagmi";
-import { useState } from "react";
 import kueContract from "./hardhat/artifacts/src/hardhat/contracts/kueContract.sol/Kue.json";
 const abi = kueContract.abi;
 const App = () => {
