@@ -13,7 +13,6 @@ export default function AddQuestion() {
   const [question, setQuestion] = React.useState("");
   const [title, setTitle] = React.useState("");
   const [value, setValue] = React.useState("0");
-  const handleChange = (event) => setQuestion(event.target.value);
   return (
     <Flex
       grow={1}
@@ -31,7 +30,6 @@ export default function AddQuestion() {
           borderColor={useColorModeValue("gray.300", "gray.700")}
           mb={6}
           placeholder="Give your question a title"
-          value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <Textarea
@@ -42,20 +40,18 @@ export default function AddQuestion() {
           focusBorderColor={useColorModeValue("blue.500", "blue.100")}
           height="200px"
           mb={6}
-          onChange={handleChange}
+          onChange={(e) => setQuestion(e.target.value)}
           placeholder="Write yout question here (keep it simple and clear to get the best answer)"
           resize="none"
-          value={question}
         />
         <Input
           bgColor={useColorModeValue("gray.100", "gray.700")}
           borderColor={useColorModeValue("gray.300", "gray.700")}
           mb={6}
           placeholder="Fund your Question"
-          value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <AddQuestionButton value={value} question={question} />
+        <AddQuestionButton value={value ? value : "0"} question={question} />
       </Box>
     </Flex>
   );
