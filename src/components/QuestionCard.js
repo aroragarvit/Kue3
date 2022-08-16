@@ -1,10 +1,7 @@
 import { Box, Button, Text, Flex, useColorModeValue } from "@chakra-ui/react";
 import { ethers } from "ethers";
-import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 
-export const Question = ({ question }) => {
-  console.log(question);
+export const QuestionCard = ({ question }) => {
   return (
     <Box
       border={"1px solid"}
