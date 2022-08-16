@@ -11,7 +11,6 @@ import {
 import kueContract from "../hardhat/artifacts/src/hardhat/contracts/kueContract.sol/Kue.json";
 
 const abi = kueContract.abi;
-console.log(abi);
 
 export const AddQuestionButton = ({ value, question }) => {
   const toast = useToast();
