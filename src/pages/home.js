@@ -4,7 +4,6 @@ import { useContractRead } from "wagmi";
 import { useAbi } from "../hooks/useAbi";
 
 const Home = () => {
-
   const abi = useAbi();
   const { data, isLoading } = useContractRead({
     addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
@@ -19,7 +18,11 @@ const Home = () => {
         <Box>Loading...</Box>
       ) : data ? (
         data.map((eachQue) => {
-          return <QuestionCard key={eachQue.id} question={eachQue} />;
+          return (
+            <Box mb={8} maxW={"60%"} marginX="auto">
+              <QuestionCard key={eachQue.id} question={eachQue} />
+            </Box>
+          );
         })
       ) : null}
     </Box>
