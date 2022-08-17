@@ -1,28 +1,45 @@
 import {
+  Box,
   Button,
+  Flex,
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
+  Text,
+  Textarea,
 } from "@chakra-ui/react";
 
-export const AnswerModal = ({ isOpen, onOpen, onClose, questionId }) => {
-  return ( 
+export const AnswerModal = ({
+  isOpen,
+  onClose,
+  questionId,
+  questionTitle,
+  questionDesc,
+}) => {
+  return (
     <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Modal Title</ModalHeader>
+      <ModalContent p={8}>
         <ModalCloseButton />
-        <ModalBody>Hello</ModalBody>
-
+        <ModalBody>
+          <Flex>
+            <Box w={"25%"} px={4}>
+              <Text fontSize={"3xl"} fontWeight={"semibold"} mb={8}>{questionTitle}</Text>
+              <Text fontSize={"lg"}>{questionDesc}</Text>
+            </Box>
+            <Box w={"75%"} px={8}>
+              <Textarea placeholder="Answer" />
+            </Box>
+          </Flex>
+        </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
+          <Button colorScheme="red" mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button variant="ghost">Secondary Action</Button>
+          <Button colorScheme="blue">Post Answer</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
