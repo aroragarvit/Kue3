@@ -9,15 +9,16 @@ export default function QuestionDesc() {
   id = id.id.toString();
   const abi = useAbi();
 
-  const { data } = useContractRead({
+  const { data, isLoading } = useContractRead({
     addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "getQuestionById",
-    args: [id],
-    onSettled(data, error) {
-      console.log("Settled", { data, error });
-    },
+    args: [id], //data and isLoading are states so each time they are changing then it refreshes  again as soon as data and isLoading changed we go to Questioncard
   });
 
-  return <Box mb={8} py={32} width={"50%"} marginX={"auto"}></Box>;
+  return (
+    <Box mb={8} py={32} width={"50%"} marginX={"auto"}>
+      {!isLoading && data && <QuestionCard question={data} />}
+    </Box>
+  );
 }
