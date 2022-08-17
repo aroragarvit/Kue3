@@ -41,7 +41,14 @@ export const QuestionCard = ({ question }) => {
       >
         Answer
       </Button>
-      <AnswerModal isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
+      <AnswerModal
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        questionId={question.id.toString()}
+        questionTitle={"Blockchain"}
+        questionDesc={question.question}
+      />
     </Box>
   );
 };
