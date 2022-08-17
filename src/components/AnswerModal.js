@@ -9,8 +9,17 @@ import {
   ModalFooter,
   ModalOverlay,
   Text,
+  useToast,
   Textarea,
 } from "@chakra-ui/react";
+import { useState, useEffect } from "react";
+import {
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+} from "wagmi";
+import { ethers } from "ethers";
+import { useAbi } from "../hooks/useAbi";
 
 export const AnswerModal = ({
   isOpen,
@@ -20,6 +29,27 @@ export const AnswerModal = ({
   questionDesc,
 }) => {
   const [answer, setAnswer] = useState("");
+  const toast = useToast();
+  const abi = useAbi();
+  const { config } = usePrepareContractWrite({
+    addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
+    contractInterface: abi,
+    functionName: "answerQuestion",
+    args: [questionId, answer],
+  });
+  const { data, write } = useContractWrite(config); // write is a function that writes to the contract
+  const { isSuccess } = useWaitForTransaction({ hash: data?.hash });
+  useEffect(() => {
+    if (isSuccess) {
+      toast({
+        title: "Success",
+        description: "Answer posted successfully",
+        status: "success",
+
+        isClosable: true,
+      });
+    }
+  }, [isSuccess]);
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
       <ModalOverlay />
@@ -38,7 +68,7 @@ export const AnswerModal = ({
                 placeholder="Answer"
                 resize={"none"}
                 height={"100%"}
-                onChange={() => {
+                onChange={(event) => {
                   setAnswer(event.target.value);
                 }}
               />
@@ -49,7 +79,23 @@ export const AnswerModal = ({
           <Button colorScheme="red" mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button colorScheme="blue">Post Answer</Button>
+          <Button
+            colorScheme="blue"
+            onClick={() => {
+              try {
+                write();
+              } catch (error) {
+                toast({
+                  title: "Error",
+                  description: error.message,
+                  status: "error",
+                  isClosable: true,
+                });
+              }
+            }}
+          >
+            Post Answer
+          </Button>
         </ModalFooter>
       </ModalContent>
     </Modal>
