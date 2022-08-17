@@ -11,6 +11,7 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
+import { useState } from "react";
 
 export const AnswerModal = ({
   isOpen,
