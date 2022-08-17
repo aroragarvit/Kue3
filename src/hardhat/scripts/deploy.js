@@ -1,10 +1,14 @@
-import { ethers } from "hardhat";
+const hre = require("hardhat");
 
 async function main() {
-  const Kue3 = await ethers.getContractFactory("Kue3");
-  const kue3 = await Translat3.deploy(Kue3);
-  await kue3.deployed();
-  console.log("Translate deployed to:", kue3.address);
+  const [deployer] = await hre.ethers.getSigners();
+  const balance = await deployer.getBalance();
+  console.log(`Deploying with the account: ${deployer.address}`);
+  console.log(`Account balance: ${balance.toString()}`);
+  const MyContract = await hre.ethers.getContractFactory("Kue");
+  const mycontract = await MyContract.deploy();
+  await mycontract.deployed();
+  console.log("MyContract deployed to:", mycontract.address);
 }
 
 main()
