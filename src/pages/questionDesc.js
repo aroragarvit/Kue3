@@ -5,21 +5,19 @@ import { useParams } from "react-router-dom";
 import { QuestionCard } from "../components/QuestionCard";
 import Answers from "../components/Answers";
 export default function QuestionDesc() {
-  const { id } = useParams();
-  console.log(id);
+  const id = useParams();
+  console.log(id.id);
   const abi = useAbi();
-  const { data, isLoading } = useContractRead({
+
+  const { data } = useContractRead({
     addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "getQuestionById",
     args: [id],
+    onSettled(data, error) {
+      console.log("Settled", { data, error });
+    },
   });
 
-  console.log(data);
-  return (
-    <Box mb={8} py={32} width={"50%"} marginX={"auto"}>
-      <QuestionCard question={data} />
-      <Answers id={id} />
-    </Box>
-  );
+  return <Box mb={8} py={32} width={"50%"} marginX={"auto"}></Box>;
 }
