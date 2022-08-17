@@ -13,12 +13,12 @@ export const Sidebar = () => {
       alignItems="flex-end"
     >
       <Link to="/addquestion">
-        {href.pathname !== "/addquestion" && (
+        {href.pathname === "/" && (
           <Button colorScheme="blue" onClick={() => {}} w={"12rem"}>
             Ask a Question
           </Button>
         )}
-        {href.pathname === "/addquestion" && (
+        {href.pathname !== "/" && (
           <Button
             colorScheme="blue"
             onClick={() => {
