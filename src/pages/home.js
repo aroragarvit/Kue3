@@ -19,8 +19,8 @@ const Home = () => {
       ) : data ? (
         data.map((eachQue) => {
           return (
-            <Box mb={8} maxW={"60%"} marginX="auto">
-              <QuestionCard key={eachQue.id} question={eachQue} />
+            <Box key={eachQue.id.toString()} mb={8} maxW={"60%"} marginX="auto">
+              <QuestionCard question={eachQue} />
             </Box>
           );
         })

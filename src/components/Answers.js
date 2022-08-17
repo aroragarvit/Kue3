@@ -18,7 +18,7 @@ export default function Answers(id) {
       ) : data ? (
         data.map((eachAns) => {
           return (
-            <Box mb={8} maxW={"60%"} marginX="auto">
+            <Box key={eachAns.id.toString()} mb={8} maxW={"60%"} marginX="auto">
               <AnswerCard key={eachAns.id.toString()} />
             </Box>
           );

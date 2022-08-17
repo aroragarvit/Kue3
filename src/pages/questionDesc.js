@@ -6,6 +6,7 @@ import { QuestionCard } from "../components/QuestionCard";
 import Answers from "../components/Answers";
 export default function QuestionDesc() {
   const { id } = useParams();
+  console.log(id);
   const abi = useAbi();
   const { data, isLoading } = useContractRead({
     addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
