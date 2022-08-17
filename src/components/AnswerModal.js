@@ -19,6 +19,7 @@ export const AnswerModal = ({
   questionTitle,
   questionDesc,
 }) => {
+  const [answer, setAnswer] = useState("");
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
       <ModalOverlay />
@@ -27,11 +28,20 @@ export const AnswerModal = ({
         <ModalBody>
           <Flex>
             <Box w={"25%"} px={4}>
-              <Text fontSize={"3xl"} fontWeight={"semibold"} mb={8}>{questionTitle}</Text>
+              <Text fontSize={"3xl"} fontWeight={"semibold"} mb={8}>
+                {questionTitle}
+              </Text>
               <Text fontSize={"lg"}>{questionDesc}</Text>
             </Box>
             <Box w={"75%"} px={8}>
-              <Textarea placeholder="Answer" />
+              <Textarea
+                placeholder="Answer"
+                resize={"none"}
+                height={"100%"}
+                onChange={() => {
+                  setAnswer(event.target.value);
+                }}
+              />
             </Box>
           </Flex>
         </ModalBody>
