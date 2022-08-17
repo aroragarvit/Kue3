@@ -5,8 +5,8 @@ import { useParams } from "react-router-dom";
 import { QuestionCard } from "../components/QuestionCard";
 import Answers from "../components/Answers";
 export default function QuestionDesc() {
-  const id = useParams();
-  console.log(id.id);
+  let id = useParams();
+  id = id.id.toString();
   const abi = useAbi();
 
   const { data } = useContractRead({
