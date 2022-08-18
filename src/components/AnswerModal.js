@@ -40,6 +40,7 @@ export const AnswerModal = ({
   const { data, write } = useContractWrite(config); // write is a function that writes to the contract
   const { isSuccess } = useWaitForTransaction({ hash: data?.hash });
   useEffect(() => {
+    onClose();
     if (isSuccess) {
       toast({
         title: "Success",
