@@ -18,7 +18,12 @@ export default function QuestionDesc() {
 
   return (
     <Box mb={8} py={32} width={"50%"} marginX={"auto"}>
-      {!isLoading && data && <QuestionCard question={data} />}
+      {!isLoading && data && (
+        <Box>
+          <QuestionCard question={data} />
+          <Answers id={id} />
+        </Box>
+      )}
     </Box>
   );
 }
