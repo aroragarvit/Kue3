@@ -8,10 +8,12 @@ import {
   usePrepareContractWrite,
   useWaitForTransaction,
 } from "wagmi";
+import { useIPFS } from "../hooks/useIPFS";
 
 export const AddQuestionButton = ({ value, title, question }) => {
   const toast = useToast();
   const abi = useAbi();
+  const {addText} = useIPFS();
   const { config } = usePrepareContractWrite({
     addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
     contractInterface: abi,
@@ -45,6 +47,7 @@ export const AddQuestionButton = ({ value, title, question }) => {
       leftIcon={<AddIcon />}
       onClick={() => {
         try {
+          const cid = addText(question);
           write();
         } catch (error) {
           toast({
