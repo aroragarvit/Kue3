@@ -9,7 +9,7 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 
-export const AddQuestionButton = ({ value, title,question }) => {
+export const AddQuestionButton = ({ value, title, question }) => {
   const toast = useToast();
   const abi = useAbi();
   const { config } = usePrepareContractWrite({
@@ -53,6 +53,7 @@ export const AddQuestionButton = ({ value, title,question }) => {
             status: "error",
             isClosable: true,
           });
+          console.log(error);
         }
       }}
     >

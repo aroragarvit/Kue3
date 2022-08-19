@@ -1,8 +1,10 @@
 import { useContractRead } from "wagmi";
 import { useAbi } from "../hooks/useAbi";
 import { Box, useColorModeValue, Text } from "@chakra-ui/react";
+
 import AnswerCard from "../components/AnswerCard";
 export default function Answers({ id }) {
+  let questionId = id;
   const abi = useAbi();
   const { data, isLoading } = useContractRead({
     addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
@@ -27,7 +29,10 @@ export default function Answers({ id }) {
           data &&
           data.map((answer) => (
             <Box key={answer.toString()}>
-              <AnswerCard answerId={answer.toString()} />
+              <AnswerCard
+                answerId={answer.toString()}
+                questionId={questionId.toString()}
+              />
             </Box>
           ))}
         {!isLoading && !data && (

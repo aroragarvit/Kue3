@@ -1,8 +1,11 @@
 import { Box, Text, SkeletonText, useColorModeValue } from "@chakra-ui/react";
 import { useAbi } from "../hooks/useAbi";
 import { useContractRead } from "wagmi";
-
-export default function AnswerCard({ answerId }) {
+import Approve from "/home/garvit/programming/Kue3/kue3/src/components/Approve.js";
+export default function AnswerCard({
+  answerId = answerId,
+  questionId = questionId,
+}) {
   const abi = useAbi();
   const { data, isLoading } = useContractRead({
     addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
@@ -20,7 +23,10 @@ export default function AnswerCard({ answerId }) {
       {isLoading && <SkeletonText />}
       {!isLoading && data && (
         <>
-          <Text fontSize={"x-small"} fontFamily={"mono"} mb={4}>BY: {data.autor}</Text>
+          <Text fontSize={"x-small"} fontFamily={"mono"} mb={4}>
+            BY: {data.autor}
+          </Text>
+          <Approve answerId={answerId} questionId={questionId}></Approve>
           <Text>{data.answer}</Text>
         </>
       )}
