@@ -26,8 +26,8 @@ export default function AnswerCard({
           <Text fontSize={"x-small"} fontFamily={"mono"} mb={4}>
             BY: {data.autor}
           </Text>
-          <Approve answerId={answerId} questionId={questionId}></Approve>
           <Text>{data.answer}</Text>
+          <Approve answerId={answerId} questionId={questionId} />
         </>
       )}
     </Box>

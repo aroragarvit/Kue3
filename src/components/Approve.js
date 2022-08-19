@@ -42,14 +42,18 @@ export default function Approve({
     }
   }, [isSuccess]);
   return (
-    <Button
-      variantColor="green"
-      variant="outline"
-      onClick={() => {
-        write();
-      }}
-    >
-      Approve
-    </Button>
+    <Flex justifyContent={"right"} w={"full"}>
+      <Button
+        colorScheme="blue"
+        variant="solid"
+        size={"sm"}
+        mt={4}
+        onClick={() => {
+          write();
+        }}
+      >
+        Approve
+      </Button>
+    </Flex>
   );
 }
