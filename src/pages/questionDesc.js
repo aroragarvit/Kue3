@@ -17,7 +17,7 @@ export default function QuestionDesc() {
   });
 
   return (
-    <Box mb={8} py={32} width={"50%"} marginX={"auto"}>
+    <Box mb={8} pt={32} width={"50%"} marginX={"auto"} overflowY={"scroll"} maxH={"95vh"}>
       {!isLoading && data && (
         <Box>
           <QuestionCard question={data} />
