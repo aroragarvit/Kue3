@@ -27,7 +27,7 @@ export default function Answers({ id }) {
           data &&
           data.map((answer) => (
             <Box key={answer.toString()}>
-              <AnswerCard answer={answer.toString()} />
+              <AnswerCard answerId={answer.toString()} />
             </Box>
           ))}
         {!isLoading && !data && (
