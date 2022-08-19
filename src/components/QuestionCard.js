@@ -26,7 +26,7 @@ export const QuestionCard = ({ question }) => {
         </Link>
         <Button isDisabled colorScheme="blue" borderRadius={999} h={6}>
           <Text fontSize={"xs"}>
-            {(parseInt(question.poolMoney) / 10e18).toString()} MATIC
+            {(parseInt(question.poolMoney) / 10e17).toString()} MATIC
           </Text>
         </Button>
       </Flex>
