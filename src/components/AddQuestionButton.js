@@ -9,14 +9,14 @@ import {
   useWaitForTransaction,
 } from "wagmi";
 
-export const AddQuestionButton = ({ value, question }) => {
+export const AddQuestionButton = ({ value, title,question }) => {
   const toast = useToast();
   const abi = useAbi();
   const { config } = usePrepareContractWrite({
     addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "createQuestion",
-    args: [question],
+    args: [title, question],
     overrides: {
       value: ethers.utils.parseEther(value),
     },

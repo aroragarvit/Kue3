@@ -52,7 +52,7 @@ export default function AddQuestion() {
           placeholder="Fund your Question"
           onChange={(e) => setValue(e.target.value)}
         />
-        <AddQuestionButton value={value ? value : "0"} question={question} />
+        <AddQuestionButton value={value ? value : "0"} title={title} question={question} />
       </Box>
     </Flex>
   );

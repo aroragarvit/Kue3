@@ -4,6 +4,7 @@ pragma solidity ^0.8.7;
 contract Kue {
     struct Question {
         uint id;
+        string title;
         string question;
         uint256 poolMoney;
         address questionAuthor;
@@ -25,10 +26,11 @@ contract Kue {
     mapping(uint => uint[]) answers; // mapping answers to question id
     mapping(uint => Answer) answer; // access answer using answer id
 
-    function createQuestion(string memory question) external payable {
+    function createQuestion(string memory _title, string memory _question) external payable {
         Question memory questionStruct;
         questionStruct.id = ++questionCount;
-        questionStruct.question = question;
+        questionStruct.title = _title;
+        questionStruct.question = _question;
         questionStruct.questionAuthor = msg.sender;
         questionStruct.isPaid = false;
         questionStruct.poolMoney = msg.value;
