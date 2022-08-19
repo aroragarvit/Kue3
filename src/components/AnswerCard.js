@@ -1,7 +1,7 @@
 import { Box, Text, SkeletonText, useColorModeValue } from "@chakra-ui/react";
 import { useAbi } from "../hooks/useAbi";
 import { useContractRead } from "wagmi";
-import Approve from "/home/garvit/programming/Kue3/kue3/src/components/Approve.js";
+import Approve from "./Approve";
 export default function AnswerCard({
   answerId = answerId,
   questionId = questionId,
