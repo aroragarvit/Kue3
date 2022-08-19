@@ -15,13 +15,13 @@ export default function QuestionDesc() {
     functionName: "getQuestionById",
     args: [id], //data and isLoading are states so each time they are changing then it refreshes  again as soon as data and isLoading changed we go to Questioncard
   });
-
+console.log(data);
   return (
     <Box mb={8} pt={32} width={"50%"} marginX={"auto"} overflowY={"scroll"} maxH={"95vh"}>
       {!isLoading && data && (
         <Box>
           <QuestionCard question={data} />
-          <Answers id={id} />
+          <Answers id={id} questionAuthor={data.questionAuthor} />
         </Box>
       )}
     </Box>

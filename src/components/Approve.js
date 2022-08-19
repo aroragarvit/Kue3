@@ -52,7 +52,7 @@ export default function Approve({
           write();
         }}
       >
-        Approve
+        Approve 
       </Button>
     </Flex>
   );

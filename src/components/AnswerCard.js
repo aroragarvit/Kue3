@@ -1,12 +1,14 @@
 import { Box, Text, SkeletonText, useColorModeValue } from "@chakra-ui/react";
 import { useAbi } from "../hooks/useAbi";
-import { useContractRead } from "wagmi";
+import { useContractRead, useAccount } from "wagmi";
 import Approve from "./Approve";
 export default function AnswerCard({
   answerId = answerId,
   questionId = questionId,
+  questionAuthor = questionAuthor,
 }) {
   const abi = useAbi();
+  const { address } = useAccount();
   const { data, isLoading } = useContractRead({
     addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
     contractInterface: abi,
@@ -27,7 +29,9 @@ export default function AnswerCard({
             BY: {data.autor}
           </Text>
           <Text>{data.answer}</Text>
-          <Approve answerId={answerId} questionId={questionId} />
+          {address === questionAuthor && (
+            <Approve answerId={answerId} questionId={questionId} />
+          )}
         </>
       )}
     </Box>

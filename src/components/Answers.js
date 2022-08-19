@@ -3,8 +3,8 @@ import { useAbi } from "../hooks/useAbi";
 import { Box, useColorModeValue, Text } from "@chakra-ui/react";
 
 import AnswerCard from "../components/AnswerCard";
-export default function Answers({ id }) {
-  let questionId = id;
+export default function Answers({ id, questionAuthor }) {
+  const questionId = id;
   const abi = useAbi();
   const { data, isLoading } = useContractRead({
     addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
@@ -32,6 +32,7 @@ export default function Answers({ id }) {
               <AnswerCard
                 answerId={answer.toString()}
                 questionId={questionId.toString()}
+                questionAuthor={questionAuthor}
               />
             </Box>
           ))}
