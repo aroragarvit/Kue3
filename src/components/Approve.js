@@ -3,17 +3,12 @@ import {
   usePrepareContractWrite,
   useWaitForTransaction,
 } from "wagmi";
-import { ethers } from "ethers";
 import { useAbi } from "../hooks/useAbi";
 import { useEffect } from "react";
 import {
-  Box,
   Button,
   Flex,
-  Text,
-  Textarea,
   useToast,
-  toast,
 } from "@chakra-ui/react";
 
 export default function Approve({
