@@ -2,6 +2,7 @@ import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
 import { useColorMode, useColorModeValue } from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode();
@@ -17,7 +18,7 @@ export const Navbar = () => {
       zIndex={1}
     >
       <Flex h="9.8vh" alignItems={"center"} justifyContent={"space-between"}>
-        <Text fontSize="3xl">Kue3</Text>
+        <Link to={"/"}><Text fontSize="3xl">Kue3</Text></Link>
         <Flex>
           <IconButton
             aria-label="theme switcher"
