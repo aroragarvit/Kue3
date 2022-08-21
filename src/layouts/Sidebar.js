@@ -1,35 +1,33 @@
-import { Link } from "react-router-dom";
 import { Flex, useColorModeValue, Button } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
+import { useRouter } from "next/router";
 
 export const Sidebar = () => {
-  const href = useLocation();
+  const router = useRouter();
+  const path = router.pathname;
   return (
-    <Flex
-      h="100vh"
-      bg={useColorModeValue("gray.100", "gray.900")}
-      py={4}
-      px={10}
-      alignItems="flex-end"
-    >
-      <Link to="/addquestion">
-        {href.pathname === "/" && (
-          <Button colorScheme="blue" onClick={() => {}} w={"12rem"}>
-            Ask a Question
-          </Button>
-        )}
-        {href.pathname !== "/" && (
-          <Button
-            colorScheme="blue"
-            onClick={() => {
-              window.location.href = "/";
-            }}
-            w={"12rem"}
-          >
-            Home
-          </Button>
-        )}
-      </Link>
+    <Flex h="100vh" bg={useColorModeValue("gray.100", "gray.900")} py={4} px={10} alignItems="flex-end">
+      {path === "/" && (
+        <Button
+          colorScheme="blue"
+          onClick={() => {
+            router.replace("/askquestion");
+          }}
+          w={"12rem"}
+        >
+          Ask a Question
+        </Button>
+      )}
+      {path !== "/" && (
+        <Button
+          colorScheme="blue"
+          onClick={() => {
+            router.replace("/");
+          }}
+          w={"12rem"}
+        >
+          Home
+        </Button>
+      )}
     </Flex>
   );
-}
+};

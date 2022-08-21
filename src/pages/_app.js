@@ -26,9 +26,9 @@ function MyApp({ Component, pageProps }) {
     <ChakraProvider>
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
-          {/* <Navbar /> */}
+          <Navbar />
           <Flex flexDirection={"row-reverse"}>
-            {/* <Sidebar /> */}
+            <Sidebar />
             <Component {...pageProps} />
           </Flex>
         </RainbowKitProvider>
