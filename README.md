@@ -1,22 +1,34 @@
-# Starting the project
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-### Staring a local chain
+## Getting Started
 
-```yarn hardhat node```
+First, run the development server:
 
-### Deploying the smart contract
+```bash
+npm run dev
+# or
+yarn dev
+```
 
-```yarn hardhat run ./src/hardhat/scripts/deploy.js --network localhost```
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Updating .env
+You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-Add the smart contract address into .env by
-```REACT_APP_CONTRACT_ADDRESS=<Address of contract>```
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-### Starting React Server
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-```yarn start```
+## Learn More
 
-### Running the Application
+To learn more about Next.js, take a look at the following resources:
 
-Go to ```https://localhost:3000```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
