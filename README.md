@@ -11,7 +11,7 @@
 ### Updating .env
 
 Add the smart contract address into .env by
-```REACT_APP_CONTRACT_ADDRESS=<Address of contract>```
+```NEXT_PUBLIC_CONTRACT_ADDRESS=<Address of contract>```
 
 ### Starting Next Server
 
