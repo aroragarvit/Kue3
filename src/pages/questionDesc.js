@@ -10,7 +10,7 @@ export default function QuestionDesc() {
   const abi = useAbi();
 
   const { data, isLoading } = useContractRead({
-    addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
+    addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "getQuestionById",
     args: [id], //data and isLoading are states so each time they are changing then it refreshes  again as soon as data and isLoading changed we go to Questioncard

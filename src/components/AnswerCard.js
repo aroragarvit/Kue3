@@ -10,7 +10,7 @@ export default function AnswerCard({
   const abi = useAbi();
   const { address } = useAccount();
   const { data, isLoading } = useContractRead({
-    addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
+    addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "getAnswerById",
     args: [answerId],

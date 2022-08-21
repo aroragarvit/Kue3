@@ -18,7 +18,7 @@ export default function Approve({
   const abi = useAbi();
   const toast = useToast();
   const { config } = usePrepareContractWrite({
-    addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
+    addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "approvePayment",
     args: [questionId, answerId],

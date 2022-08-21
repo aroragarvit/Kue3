@@ -32,7 +32,7 @@ export const AnswerModal = ({
   const toast = useToast();
   const abi = useAbi();
   const { config } = usePrepareContractWrite({
-    addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
+    addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "answerQuestion",
     args: [questionId, answer],

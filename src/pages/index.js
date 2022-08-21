@@ -7,7 +7,7 @@ import { useContractRead } from "wagmi";
 export default function Home() {
   const abi = useAbi();
   const { data, isLoading } = useContractRead({
-    addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
+    addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "getLatestQuestion",
     args: [1],

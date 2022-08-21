@@ -7,7 +7,7 @@ export default function Answers({ id, questionAuthor }) {
   const questionId = id;
   const abi = useAbi();
   const { data, isLoading } = useContractRead({
-    addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
+    addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "getAnswersByQuestion",
     args: [id],

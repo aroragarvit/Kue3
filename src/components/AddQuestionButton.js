@@ -3,20 +3,15 @@ import { Button, useToast } from "@chakra-ui/react";
 import { ethers } from "ethers";
 import { useAbi } from "../hooks/useAbi";
 import { useEffect, useState } from "react";
-import {
-  useContractWrite,
-  usePrepareContractWrite,
-  useWaitForTransaction,
-} from "wagmi";
-import { useIPFS } from "../hooks/useIPFS";
+import { useContractWrite, usePrepareContractWrite, useWaitForTransaction } from "wagmi";
+import axios from "axios";
 
 export const AddQuestionButton = ({ value, title, question }) => {
   const toast = useToast();
   const abi = useAbi();
   const [cid, setCid] = useState();
-  const {addText} = useIPFS();
   const { config } = usePrepareContractWrite({
-    addressOrName: process.env.REACT_APP_CONTRACT_ADDRESS,
+    addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
     contractInterface: abi,
     functionName: "createQuestion",
     args: [title, cid],
@@ -44,12 +39,16 @@ export const AddQuestionButton = ({ value, title, question }) => {
       colorScheme="blue"
       variant="solid"
       leftIcon={<AddIcon />}
-      onClick={() => {
+      onClick={async () => {
         try {
-          const cid = addText(question);
-          console.log(cid);
-          setCid(cid);
-          write();
+          const res = await axios.post("/api/addtext", {
+            text: question,
+          });
+          console.log(res.data.cid);
+          setCid(res.data.cid);
+          setTimeout(() => {
+            write();
+          }, 500);
         } catch (error) {
           toast({
             title: "Error",
