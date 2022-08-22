@@ -1,5 +1,5 @@
 import { AnswerModal } from "./AnswerModal";
-import { Box, Button, Text, Flex, useColorModeValue, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, Flex, SkeletonText, Text, useColorModeValue, useDisclosure } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -7,7 +7,7 @@ import axios from "axios";
 export const QuestionCard = ({ question }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
-  const [text, setText] = useState("");
+  const [text, setText] = useState(null);
   useEffect(() => {
     axios
       .post("/api/gettext", {
@@ -35,7 +35,7 @@ export const QuestionCard = ({ question }) => {
           <Text fontSize={"xs"}>{(parseInt(question.poolMoney) / 10e17).toString()} MATIC</Text>
         </Button>
       </Flex>
-      <Text>{text}</Text>
+      {text ? <Text>{text}</Text> : <SkeletonText />}
 
       <Button onClick={onOpen} type="solid" colorScheme="blue" marginTop={8} size="sm">
         Answer
