@@ -48,7 +48,7 @@ export const AddQuestionButton = ({ value, title, question }) => {
           setCid(res.data.cid);
           setTimeout(() => {
             write();
-          }, 500);
+          }, 1000);
         } catch (error) {
           toast({
             title: "Error",
