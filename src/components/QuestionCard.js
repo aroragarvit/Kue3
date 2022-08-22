@@ -25,7 +25,7 @@ export const QuestionCard = ({ question }) => {
           as="strong"
           lineHeight={2}
           onClick={() => {
-            router.replace(`/questionDesc/${question.id.toString()}`);
+            router.replace(`/question/${question.id.toString()}`);
           }}
           cursor={"pointer"}
         >
