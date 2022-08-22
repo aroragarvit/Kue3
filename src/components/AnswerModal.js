@@ -18,7 +18,6 @@ import {
   usePrepareContractWrite,
   useWaitForTransaction,
 } from "wagmi";
-import { ethers } from "ethers";
 import { useAbi } from "../hooks/useAbi";
 
 export const AnswerModal = ({
