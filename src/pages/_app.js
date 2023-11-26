@@ -7,7 +7,7 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { publicProvider } from "wagmi/providers/public";
 
-const { chains, provider } = configureChains([chain.hardhat, chain.polygonMumbai], [publicProvider()]);
+const { chains, provider } = configureChains([chain.polygonMumbai, chain.hardhat ], [publicProvider()]);
 
 const { connectors } = getDefaultWallets({
   appName: "Kue3",
