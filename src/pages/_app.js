@@ -3,28 +3,31 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { ChakraProvider, Flex } from "@chakra-ui/react";
 import { Navbar } from "../layouts/Navbar";
 import { Sidebar } from "../layouts/Sidebar";
-import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { RainbowKitProvider, connectorsForWallets } from "@rainbow-me/rainbowkit";
+import { injectedWallet } from "@rainbow-me/rainbowkit/wallets";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { polygonMumbai } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
-const { chains, provider } = configureChains([chain.polygonMumbai, chain.hardhat ], [publicProvider()]);
+const { chains, publicClient } = configureChains([polygonMumbai], [publicProvider()]);
 
-const { connectors } = getDefaultWallets({
-  appName: "Kue3",
-  chains,
-});
+const connectors = connectorsForWallets([
+  {
+    groupName: "Recommended",
+    wallets: [injectedWallet({ chains })],
+  },
+]);
 
-const wagmiClient = createClient({
+const wagmiConfig = createConfig({
   autoConnect: true,
-  persister: null,
   connectors,
-  provider,
+  publicClient,
 });
 
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider>
-      <WagmiConfig client={wagmiClient}>
+      <WagmiConfig config={wagmiConfig}>
         <RainbowKitProvider chains={chains}>
           <Navbar />
           <Flex flexDirection={"row-reverse"}>

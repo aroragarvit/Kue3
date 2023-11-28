@@ -2,16 +2,23 @@ import Head from "next/head";
 import { Box } from "@chakra-ui/react";
 import { QuestionCard } from "../components/QuestionCard";
 import { useAbi } from "../hooks/useAbi";
-import { useContractRead } from "wagmi";
+import { readContract } from "@wagmi/core";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const abi = useAbi();
-  const { data, isLoading } = useContractRead({
-    addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-    contractInterface: abi,
-    functionName: "getLatestQuestion",
-    args: [1],
-  });
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    readContract({
+      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+      abi: abi,
+      functionName: "getLatestQuestion",
+      args: [1],
+    }).then((res) => {
+      setData(res);
+    });
+  }, []);
   return (
     <>
       <Head>
@@ -20,7 +27,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Box py={32} w={"100%"} px={16}>
-        {isLoading ? (
+        {!data ? (
           <Box>Loading...</Box>
         ) : data ? (
           data.map((eachQue) => {
@@ -30,7 +37,9 @@ export default function Home() {
               </Box>
             );
           })
-        ) : null}
+        ) : (
+          "No questions asked yet"
+        )}
       </Box>
     </>
   );
