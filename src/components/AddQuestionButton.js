@@ -44,9 +44,7 @@ export const AddQuestionButton = ({ value, title, question }) => {
         abi: abi,
         functionName: "createQuestion",
         args: [title, cid],
-        overrides: {
-          value: ethers.utils.parseEther(value),
-        },
+        value: ethers.utils.parseEther(value),
       });
       return config;
     } catch (error) {
