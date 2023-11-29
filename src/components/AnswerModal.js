@@ -14,12 +14,12 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useAbi } from "../hooks/useAbi";
-import { prepareWriteContract, writeContract } from "@wagmi/core";
+import { prepareWriteContract, writeContract, waitForTransaction } from "@wagmi/core";
 
 export const AnswerModal = ({ isOpen, onClose, questionId, questionTitle, questionDesc }) => {
-  const [answer, setAnswer] = useState("");
   const toast = useToast();
-  const abi = useAbi(answer);
+  const abi = useAbi();
+  const [answer, setAnswer] = useState("");
 
   const handleClick = async () => {
     const config = await createConfig(answer);
@@ -35,8 +35,8 @@ export const AnswerModal = ({ isOpen, onClose, questionId, questionTitle, questi
   const createConfig = async (answer) => {
     try {
       const config = await prepareWriteContract({
-        addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-        contractInterface: abi,
+        address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+        abi: abi,
         functionName: "answerQuestion",
         args: [questionId, answer],
       });
@@ -85,7 +85,6 @@ export const AnswerModal = ({ isOpen, onClose, questionId, questionTitle, questi
             colorScheme="blue"
             onClick={() => {
               handleClick();
-              onClose();
             }}
           >
             Post Answer
