@@ -12,44 +12,46 @@ import {
   useToast,
   Textarea,
 } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
-import {
-  useContractWrite,
-  usePrepareContractWrite,
-  useWaitForTransaction,
-} from "wagmi";
+import { useState } from "react";
 import { useAbi } from "../hooks/useAbi";
+import { prepareWriteContract, writeContract } from "@wagmi/core";
 
-export const AnswerModal = ({
-  isOpen,
-  onClose,
-  questionId,
-  questionTitle,
-  questionDesc,
-}) => {
+export const AnswerModal = ({ isOpen, onClose, questionId, questionTitle, questionDesc }) => {
   const [answer, setAnswer] = useState("");
   const toast = useToast();
-  const abi = useAbi();
-  const { config } = usePrepareContractWrite({
-    addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
-    contractInterface: abi,
-    functionName: "answerQuestion",
-    args: [questionId, answer],
-  });
-  const { data, write } = useContractWrite(config); // write is a function that writes to the contract
-  const { isSuccess } = useWaitForTransaction({ hash: data?.hash });
-  useEffect(() => {
-    onClose();
-    if (isSuccess) {
-      toast({
-        title: "Success",
-        description: "Answer posted successfully",
-        status: "success",
+  const abi = useAbi(answer);
 
+  const handleClick = async () => {
+    const config = await createConfig(answer);
+    await writeContract(config);
+    toast({
+      title: "Success",
+      description: "Your question has been posted!",
+      status: "success",
+      isClosable: true,
+    });
+  };
+
+  const createConfig = async (answer) => {
+    try {
+      const config = await prepareWriteContract({
+        addressOrName: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
+        contractInterface: abi,
+        functionName: "answerQuestion",
+        args: [questionId, answer],
+      });
+      return config;
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: error.message,
+        status: "error",
         isClosable: true,
       });
+      console.log(error);
     }
-  }, [isSuccess]);
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={"full"}>
       <ModalOverlay />
@@ -82,16 +84,8 @@ export const AnswerModal = ({
           <Button
             colorScheme="blue"
             onClick={() => {
-              try {
-                write();
-              } catch (error) {
-                toast({
-                  title: "Error",
-                  description: error.message,
-                  status: "error",
-                  isClosable: true,
-                });
-              }
+              handleClick();
+              onClose();
             }}
           >
             Post Answer
